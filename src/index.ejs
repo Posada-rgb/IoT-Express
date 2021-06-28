@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POSADA Projects</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+</head>
+
+<body>
+    
+    <!--<canvas id="myChart" width="400" height="400"></canvas>-->
+    
+<nav class="navbar navbar-dark bg-dark">
+        <a href="/" class="navbar-brand">Proyecto IOT Humo Luz</a>
+    </nav>
+
+
+<h1>SICOPREDO</h1>
+<h4>Sensor de Temperatura</h4>
+<canvas id="myChart"></canvas>
+<br>
+<br>
+<h4>Sensor de Humedad</h4>
+<canvas id="myChart1"></canvas>
+<br>
+<br>
+                
+        <% var contador =0;
+
+            for(var i=0; i < valores.length; i++){
+                var test = valores[i].nombre;
+                var values = valores[i].valores;
+            }
+        %>
+                
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"></script>
+                <script>
+                    var getTest = "<%= test %>";
+                    var datos = "<%= values %>";
+
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const actions = [
+                        {
+                            
+                            name: 'Add Dataset',
+                            handler(chart){
+                                chart.data.datasets.forEach(dataset => {
+
+                                    dataset.data = Utils.numbers({count: chart.data.labels.length, min: -100, max:100});
+
+                                });
+                                chart.update();
+                            }
+                        }
+
+                    ]
+
+                    const agregar = [
+                    {       
+                            
+                            name: 'Add data',
+                            handler(chart){
+                                const data = chart.data;
+                                if (data.datasets.length > 0){
+                                    data.labels = Utils.numbers({count: data.labels.length + 1});
+
+                                    for(var index = 0; index < data.datasets.length; ++index){
+                                        data.datasets[index].data.push(Utils.rand(-100, 100));
+                                    }
+                                }
+                            }
+                        }
+                    ]
+
+                    const chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [actions],
+                            datasets: [{
+                                label:[agregar],
+                                data: [data]}],
+                        },
+                        options: {responsive: true}
+                    });
+
+                    const ctx = document.getElementById('myChart1').getContext('2d');
+                    const chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [actions],
+                            datasets: [{
+                                label:[agregar],
+                                data: [data]}],
+                        },
+                        options: {responsive: true}
+                    });
+
+
+                </script>
+        </div>
+    </div>
+
+
+   
+   
+</body>
+
+</html>
